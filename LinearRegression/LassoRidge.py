@@ -15,7 +15,7 @@ if __name__ == "__main__":
     
     x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=1)
     model = Lasso()
-    alpha_can = np.logspace(-3,2,10)
+    alpha_can = np.logspace(-3,2,10) # from 10^-3 to 10^2, 10 numbers in total
     lasso_model = GridSearchCV(model, param_grid={'alpha': alpha_can}, cv=5)
     lasso_model.fit(x,y)
     print("best params: ", lasso_model.best_params_)
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     rmse = np.sqrt(mse)
     
     print(mse , rmse)
-    
+    print("score for lasso mode: ", lasso_model.score(x_test,y_test))
     modelR = Ridge()
     ridge_model = GridSearchCV(modelR, param_grid={'alpha': alpha_can}, cv=5)
     ridge_model.fit(x,y)
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     rmse_ridge = np.sqrt(mse_ridge)
     
     print("mse and rmse for ridge model is: " , mse_ridge , rmse_ridge)
-    
+    print("score for ridge mode: " , ridge_model.score(x_test,y_test))
     
 #https://blog.csdn.net/jiang_jinyue/article/details/78369088
     
