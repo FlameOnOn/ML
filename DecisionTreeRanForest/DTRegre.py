@@ -24,3 +24,17 @@ if __name__ == '__main__':
     y_predict = dtr.predict(x_test).reshape(-1,1)
     
     print(y_predict)
+    print(dtr.score(x, y))
+    
+    depth = [2, 4, 6, 8, 10]
+    reg = [DecisionTreeRegressor(criterion='mse', max_depth=depth[0]),
+           DecisionTreeRegressor(criterion='mse', max_depth=depth[1]),
+           DecisionTreeRegressor(criterion='mse', max_depth=depth[2]),
+           DecisionTreeRegressor(criterion='mse', max_depth=depth[3]),
+           DecisionTreeRegressor(criterion='mse', max_depth=depth[4])]
+    
+    for i, r in enumerate(reg):
+        dt = r.fit(x, y)
+        y_predict_new = dt.predict(x_test)
+        print(y_predict)
+        print(dt.score(x, y))
